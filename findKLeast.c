@@ -10,7 +10,6 @@
 #include "max-heap.h"
 
 
-
 /**GLOBALS**/
 int nTotalElements, k, nThreads; 
 float Input[MAX_SIZE];
@@ -22,11 +21,19 @@ float Input[MAX_SIZE];
                                             // which fits in 2 GB of RAM
 #endif   
 
+int cmpfunc (const void * a, const void * b) {
+    float fa = *(const float*) a;
+    float fb = *(const float*) b;
+    return (fa > fb) - (fa < fb);
+}
 
-void verifyOutput( const float *Input, 
-                   const pair_t *Output,   // pair_t é o tipo de um par (v,p)
-                      int nTotalElmts,
-                      int k )
+
+void verifyOutput( 
+    // const float *Input, 
+    //                const pair_t *Output,   // pair_t é o tipo de um par (v,p)
+    //                   int nTotalElmts,
+    //                   int k
+                       )
 {
     // codigo da verificacao a ser incluido por voce
     // voce deve verificar se o conjunto de pares de saida está correto
@@ -52,6 +59,21 @@ void verifyOutput( const float *Input,
     //      Se a chave Ki estiver em Is com valor val==vi continue
     //      senão faça ok = 0 e reporte o erro abaixo
     
+    // for( int n = 0 ; n < nTotalElements; n++ ) {   
+    //   printf("%f ", Input[n]);
+    // }
+
+    printf("\n\n");
+    qsort(Input, nTotalElements, sizeof(float), cmpfunc);
+    // for( int n = 0 ; n < nTotalElements; n++ ) {   
+    //   printf("%f ", Input[n]);
+    // }
+
+    for (int i=0;i < k;++i){
+        // if (Input[i] not in heap){
+        //     ok = 0;
+        // }
+    }
     if( ok )
        printf( "\nOutput set verifyed correctly.\n" );
     else
@@ -104,7 +126,7 @@ pair_t * findKLeastProgram(){
         inputTuple.val = i;
         decreaseMax(heap, heapSize, inputTuple); // Decreasing the maximum value to 5
 
-        printf("decreaseMax %f\n", Input[i]);
+        printf("decreaseMax %f \n", Input[i]);
 
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
@@ -119,7 +141,7 @@ pair_t * findKLeastProgram(){
     //          menores elementos de C
     drawHeapTree( heap, heapSize, k );
 
-
+    verifyOutput();
     return heap; 
 }
 
@@ -168,6 +190,13 @@ int main (int argc, char *argv[]) {
         Input[ p ] = v;
         ++inputSize;
     }
+
+
+    for( int n = 0 ; n < nTotalElements; n++ ) {   
+      printf("%f ", Input[n]);
+    }
+
+    printf("\n\n");
 
 
     findKLeastProgram();
