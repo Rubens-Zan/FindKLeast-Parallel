@@ -30,10 +30,10 @@ int cmpfunc (const void * a, const void * b) {
 
 
 void verifyOutput( 
-    // const float *Input, 
-    //                const pair_t *Output,   // pair_t é o tipo de um par (v,p)
-    //                   int nTotalElmts,
-    //                   int k
+    const float *Input, 
+    const pair_t *Output,   // pair_t é o tipo de um par (v,p)
+    int nTotalElmts,
+    int k
 )
 {
     qsort(Input, nTotalElements, sizeof(float), cmpfunc);
@@ -59,7 +59,12 @@ void verifyOutput(
 
 
 
-void findKLeastProgram(){
+pair_t * findKLeastProgram(
+    const float *Input, 
+    const pair_t *Output,   // pair_t é o tipo de um par (v,p)
+    int nTotalElmts,
+    int k
+){
 //     Podemos aplicar uma estrutura de dados do tipo Max-Heap
 //      e a operação decreaseMax no seguinte problema:
 //      Dado um conjunto C de n valores, queremos obter o
@@ -71,7 +76,7 @@ void findKLeastProgram(){
 //          esses elementos.
     // pair_t * heap = malloc(sizeof(pair_t) * k);
     int heapSize;
-
+    pair_t *outputPortion = malloc( sizeof(pair_t) * k ); 
     heapSize = 0;
     
     for( int i=0; i< k; i++ ) {
@@ -79,7 +84,7 @@ void findKLeastProgram(){
       pair_t inputTuple; 
       inputTuple.key = Input[i];
       inputTuple.val = i;
-      insert( Output, &heapSize, inputTuple );
+      insert( (pair_t *) outputPortion, &heapSize, inputTuple );
       
       #ifdef DEBUG 
       printf("------Max-Heap Tree------ ");
@@ -99,13 +104,13 @@ void findKLeastProgram(){
         pair_t inputTuple; 
         inputTuple.key = Input[i];
         inputTuple.val = i;
-        decreaseMax(Output, heapSize, inputTuple); // Decreasing the maximum value to 5
+        decreaseMax(outputPortion, heapSize, inputTuple); // Decreasing the maximum value to 5
 
         printf("decreaseMax %f \n", Input[i]);
 
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
-        if( isMaxHeap( Output, heapSize ) )
+        if( isMaxHeap( outputPortion, heapSize ) )
             printf( "is a heap!\n" );
         else
             printf( "is NOT a heap!\n" );
@@ -117,20 +122,19 @@ void findKLeastProgram(){
 
     //          ● Ao final, o Max-Heap h contém o subconjunto de k
     //          menores elementos de C
-    drawHeapTree( Output, heapSize, k );
-    if( !isMaxHeap( Output, heapSize ) )
+    drawHeapTree( outputPortion, heapSize, k );
+    if( !isMaxHeap( outputPortion, heapSize ) )
         printf("NÃO É UMA HEAP");
     else 
         printf("É UMA HEAP");
 
 
-    // return heap; 
+    return outputPortion; 
 }
 
 int main (int argc, char *argv[]) {
     int inputSize = 0;
     chronometer_t runningTime; 
-
 
     if( argc != 4 ) {
             printf( "usage: %s <nTotalElements> <k> <nThreads>\n" ,
@@ -154,6 +158,9 @@ int main (int argc, char *argv[]) {
 
         k = atoi( argv[2] ); 
     }
+
+    pair_t *outputPortions[nThreads];
+
     // usage: ./acharKMenores <nTotalElements> <k> <nThreads>
     // k elementos
     
@@ -180,9 +187,11 @@ int main (int argc, char *argv[]) {
 
     printf("\n\n");
 
+    for (int i=0;i < nThreads;++i)
+        outputPortions[i] = findKLeastProgram(Input, Output,nTotalElements, k);
 
-    findKLeastProgram();
-    verifyOutput();
+    // SE FOR PARALELO FAZER CONCATENACAO E ORDENACAO
+
     // Measuring time after threads finished...
     chrono_stop( &runningTime );
 
@@ -204,7 +213,7 @@ int main (int argc, char *argv[]) {
                                   
     double OPS = (nTotalElements)/total_time_in_seconds;
     printf( "Throughput: %lf OP/s\n", OPS );
+    verifyOutput(Input, Output, nTotalElements, k);
 
-    // verifyOutput( Input, Output, nTotalElements, k );
     return 1; 
 }

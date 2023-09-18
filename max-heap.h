@@ -16,7 +16,7 @@ typedef struct {
 } pair_t;
 
 
-#define MAX_SIZE 10*1000 // verificar
+#define MAX_SIZE 2*1000000 // verificar
 
 void drawHeapTree( pair_t heap[], int size, int nLevels ) ;  // FIX ME!
 void swap( pair_t *a, pair_t *b ); //__attribute__((always_inline));
