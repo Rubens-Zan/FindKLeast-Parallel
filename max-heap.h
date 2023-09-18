@@ -3,11 +3,12 @@
 
 #include <math.h>
 
-#define SHOW_DECREASE_MAX_STEPS 1
+#define SHOW_DECREASE_MAX_STEPS 0
 #define MAX_HEAP_SIZE (1024*1024)
 
 #define FLOAT 1
 #define TYPE FLOAT 
+
 typedef struct {
     float key;   // inserir um valor v float na chave 
                  //  (obtido do vetor de entrada Input)

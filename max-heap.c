@@ -25,7 +25,7 @@ void drawHeapTree( pair_t heap[], int size, int nLevels )   // FIX ME!
         // print all elements in this level     
         for( int i=offset; i<size && i<(offset+nElements); i++ ) {
            
-           printf( "[%3d]", heap[i].val );
+           printf( "[%3d, %f]", heap[i].val, heap[i].key );
            
         }   
         printf( "\n" );

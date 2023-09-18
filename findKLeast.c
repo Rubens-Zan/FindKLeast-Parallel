@@ -13,6 +13,7 @@
 /**GLOBALS**/
 int nTotalElements, k, nThreads; 
 float Input[MAX_SIZE];
+pair_t Output[MAX_SIZE];
 /**GLOBALS**/
 
 #if TYPE == FLOAT
@@ -33,58 +34,32 @@ void verifyOutput(
     //                const pair_t *Output,   // pair_t é o tipo de um par (v,p)
     //                   int nTotalElmts,
     //                   int k
-                       )
+)
 {
-    // codigo da verificacao a ser incluido por voce
-    // voce deve verificar se o conjunto de pares de saida está correto
-    // e imprimir uma das mensagens abaixo
-    int ok = 1;
-    
-    // inserir aqui o codigo da verificacao
-    // uma implementação possível para o verificador seria
-    // (nao precisa seguir essa descrição, voce pode fazer outro método
-    //  de verificação)
-    //
-    // 1) Criar um vetor I de pares (chave, valor) 
-    //    os os elementos de I devem ser copias
-    //    de cada valor (e,p) do vetor de entrada Input
-    //    (ou seja, cada valor e que veio da posição p da entrada)
-    // 2) Ordenar o vetor I em ordem crescente, 
-    //    obtendo-se um outro vetor Is (ordenado em ordem crescente de chaves)
-    //    usando um algoritmo de ordenação do tipo (chave, valor)
-    //    (por exemplo ordenação da stdlib, caso exista)
-    // 3) Para cada par (ki,vi) pertencente ao vetor Output
-    //      procurar a chave ki dentre K primeiros elementos
-    //      de Is.
-    //      Se a chave Ki estiver em Is com valor val==vi continue
-    //      senão faça ok = 0 e reporte o erro abaixo
-    
-    // for( int n = 0 ; n < nTotalElements; n++ ) {   
-    //   printf("%f ", Input[n]);
-    // }
-
-    printf("\n\n");
     qsort(Input, nTotalElements, sizeof(float), cmpfunc);
-    // for( int n = 0 ; n < nTotalElements; n++ ) {   
-    //   printf("%f ", Input[n]);
-    // }
-
+    #ifdef DEBUG
     for (int i=0;i < k;++i){
-        // if (Input[i] not in heap){
-        //     ok = 0;
-        // }
+        printf("INPUT[%d]: %f \n", i,Input[i]);
+        printf("OUTPUT[%d]: %f \n", Output[i].val,Output[i].key);
     }
-    if( ok )
-       printf( "\nOutput set verifyed correctly.\n" );
+    #endif
+    int foundElements = 0;
+    for (int i=0;i < k;++i){
+        for (int j = 0 ;j < k;++j)
+            if (Input[i] == Output[j].key)
+                ++foundElements;
+    }
+    if( foundElements == k )
+       printf( "\nOutput set verifyed correctly %d.\n",foundElements );
     else
-       printf( "\nOutput set DID NOT compute correctly!!!\n" );   
+       printf( "\nOutput set DID NOT compute correctly  %d !!!\n",foundElements );   
 }
 
 
 
 
 
-pair_t * findKLeastProgram(){
+void findKLeastProgram(){
 //     Podemos aplicar uma estrutura de dados do tipo Max-Heap
 //      e a operação decreaseMax no seguinte problema:
 //      Dado um conjunto C de n valores, queremos obter o
@@ -94,7 +69,7 @@ pair_t * findKLeastProgram(){
 //      seria:
 //          ● Extrair k elementos de C e criar um Max-Heap h com
 //          esses elementos.
-    pair_t * heap = malloc(sizeof(pair_t) * k);
+    // pair_t * heap = malloc(sizeof(pair_t) * k);
     int heapSize;
 
     heapSize = 0;
@@ -104,7 +79,7 @@ pair_t * findKLeastProgram(){
       pair_t inputTuple; 
       inputTuple.key = Input[i];
       inputTuple.val = i;
-      insert( heap, &heapSize, inputTuple );
+      insert( Output, &heapSize, inputTuple );
       
       #ifdef DEBUG 
       printf("------Max-Heap Tree------ ");
@@ -124,25 +99,32 @@ pair_t * findKLeastProgram(){
         pair_t inputTuple; 
         inputTuple.key = Input[i];
         inputTuple.val = i;
-        decreaseMax(heap, heapSize, inputTuple); // Decreasing the maximum value to 5
+        decreaseMax(Output, heapSize, inputTuple); // Decreasing the maximum value to 5
 
         printf("decreaseMax %f \n", Input[i]);
 
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
-        if( isMaxHeap( heap, heapSize ) )
+        if( isMaxHeap( Output, heapSize ) )
             printf( "is a heap!\n" );
         else
             printf( "is NOT a heap!\n" );
         #endif   
     }
 
+
+   
+
     //          ● Ao final, o Max-Heap h contém o subconjunto de k
     //          menores elementos de C
-    drawHeapTree( heap, heapSize, k );
+    drawHeapTree( Output, heapSize, k );
+    if( !isMaxHeap( Output, heapSize ) )
+        printf("NÃO É UMA HEAP");
+    else 
+        printf("É UMA HEAP");
 
-    verifyOutput();
-    return heap; 
+
+    // return heap; 
 }
 
 int main (int argc, char *argv[]) {
@@ -200,6 +182,7 @@ int main (int argc, char *argv[]) {
 
 
     findKLeastProgram();
+    verifyOutput();
     // Measuring time after threads finished...
     chrono_stop( &runningTime );
 
