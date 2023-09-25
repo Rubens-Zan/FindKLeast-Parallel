@@ -19,6 +19,11 @@
 
 #define MIN(a, b) ((a < b ? a:b))
 
+#if TYPE == FLOAT
+   #define MAX_TOTAL_ELEMENTS (500*1000*1000)  // if each float takes 4 bytes
+                                            // will have a maximum 500 million FLOAT elements
+                                            // which fits in 2 GB of RAM
+#endif   
 
 /**GLOBALS**/
 pthread_t parallelFindKLeast_Thread[ MAX_THREADS ];
@@ -28,17 +33,13 @@ pair_t Output[MAX_SIZE];
 pair_t parallel_output[MAX_SIZE];
 pthread_barrier_t parallelFindKLeast_barrier;
 
-pair_t parallelFindKLeast_partial[MAX_THREADS]; 
+pair_t *parallelFindKLeast_partial[MAX_THREADS]; 
 int parallelFindKLeast_thread_id[ MAX_THREADS ];
 int parallelFindKLeast_nTotalElements;
 int parallelFindKLeast_nThreads;
 /**GLOBALS**/
 
-#if TYPE == FLOAT
-   #define MAX_TOTAL_ELEMENTS (500*1000*1000)  // if each float takes 4 bytes
-                                            // will have a maximum 500 million FLOAT elements
-                                            // which fits in 2 GB of RAM
-#endif   
+
 
 int cmpfunc (const void * a, const void * b) {
     float fa = *(const float*) a;
@@ -94,22 +95,23 @@ pair_t * findKLeastProgram(
 //          esses elementos.
     // pair_t * heap = malloc(sizeof(pair_t) * k);
     int heapSize;
-    pair_t *outputPortion = malloc( sizeof(pair_t) * k ); 
+    // pair_t *outputPortion = malloc( sizeof(pair_t) * k ); 
     heapSize = 0;
     
     for( int i=0; i< k; i++ ) {
       printf("inserting %f\n", Input[i]);
-      pair_t inputTuple; 
-      inputTuple.key = Input[i];
-      inputTuple.val = i;
-      insert( (pair_t *) outputPortion, &heapSize, inputTuple );
-      
-      #ifdef DEBUG 
-      printf("------Max-Heap Tree------ ");
-      if( isMaxHeap( heap, heapSize ) )
-        printf( "is a heap!\n" );
-      else
-        printf( "is NOT a heap!\n" );
+        pair_t inputTuple; 
+        inputTuple.key = Input[i];
+        inputTuple.val = i;
+
+        insert( (pair_t *) Output, &heapSize, inputTuple );
+        
+        #ifdef DEBUG 
+        printf("------Max-Heap Tree------ ");
+        if( isMaxHeap( heap, heapSize ) )
+            printf( "is a heap!\n" );
+        else
+            printf( "is NOT a heap!\n" );
         #endif   
 
     }  
@@ -122,13 +124,14 @@ pair_t * findKLeastProgram(
         pair_t inputTuple; 
         inputTuple.key = Input[i];
         inputTuple.val = i;
-        decreaseMax(outputPortion, heapSize, inputTuple); 
 
-        printf("decreaseMax %f \n", Input[i]);
+        decreaseMax(Output, heapSize, inputTuple); 
+
+        // printf("decreaseMax %f \n", Input[i]);
 
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
-        if( isMaxHeap( outputPortion, heapSize ) )
+        if( isMaxHeap( Output, heapSize ) )
             printf( "is a heap!\n" );
         else
             printf( "is NOT a heap!\n" );
@@ -140,14 +143,14 @@ pair_t * findKLeastProgram(
 
     //          ● Ao final, o Max-Heap h contém o subconjunto de k
     //          menores elementos de C
-    drawHeapTree( outputPortion, heapSize, k );
-    if( !isMaxHeap( outputPortion, heapSize ) )
-        printf("NÃO É UMA HEAP");
-    else 
-        printf("É UMA HEAP");
+    drawHeapTree( Output, heapSize, k );
+    // if( !isMaxHeap( Output, heapSize ) )
+    //     printf("NÃO É UMA HEAP");
+    // else 
+        // printf("É UMA HEAP");
 
 
-    return outputPortion; 
+    return Output; 
 }
 
 void *findKLeastPartialElmts(void *ptr)
@@ -162,24 +165,27 @@ void *findKLeastPartialElmts(void *ptr)
     #if DEBUG == 1
       printf("thread %d here! first=%d last=%d\n", myIndex, first, last );
     #endif
-    
+    float inputParc[MAX_SIZE];
 //    if( myIndex != 0 )
     while( 1 ) {
     
         // all worker threads will be waiting here for the caller thread
         pthread_barrier_wait( &parallelFindKLeast_barrier );    
         
-        for (int i=0; i<k ; i++){
+
+        for (int i=first; i< last ; i++){   
             // insert first k elements
+            inputParc[i-first] = Input[i]; 
         }
-       for( int i=first+k; i<=last ; i++ ){
-        //    DECREASE with the elements in range
-       }
 
        // store my result in the array of partial found k least elements
+       
+        parallelFindKLeast_partial[ myIndex ] = malloc( sizeof(pair_t) * k ); 
 
-       parallelFindKLeast_partial[ myIndex ] = findKLeastProgram();     
-        
+       parallelFindKLeast_partial[ myIndex ] = findKLeastProgram(inputParc,parallelFindKLeast_partial[ myIndex ], last - first, k );     
+        printf("THREAD ID %d \n", myIndex); 
+        drawHeapTree( parallelFindKLeast_partial[ myIndex ], k, k );
+
        pthread_barrier_wait( &parallelFindKLeast_barrier );    
        if( myIndex == 0 )
           return NULL;           // return to caller thread
