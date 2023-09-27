@@ -27,13 +27,14 @@
 
 /**GLOBALS**/
 pthread_t parallelFindKLeast_Thread[ MAX_THREADS ];
+float inputParc[MAX_THREADS][MAX_SIZE];
 int nTotalElements, k, nThreads; 
 float Input[MAX_SIZE];
 pair_t Output[MAX_SIZE];
 pair_t parallel_output[MAX_SIZE];
 pthread_barrier_t parallelFindKLeast_barrier;
 
-pair_t parallelFindKLeast_partial[MAX_THREADS][MAX_SIZE]; 
+pair_t parallelFindKLeast_partialOutput[MAX_THREADS][MAX_SIZE]; 
 int parallelFindKLeast_thread_id[ MAX_THREADS ];
 int parallelFindKLeast_nTotalElements;
 int parallelFindKLeast_nThreads;
@@ -78,11 +79,8 @@ void verifyOutput(
 
 
 
-pair_t * findKLeastProgram(
-    const float *Input, 
-    const pair_t *Output,   // pair_t é o tipo de um par (v,p)
-    int nTotalElmts,
-    int k
+void findKLeastProgram(
+    int myIndex
 ){
 //     Podemos aplicar uma estrutura de dados do tipo Max-Heap
 //      e a operação decreaseMax no seguinte problema:
@@ -97,15 +95,20 @@ pair_t * findKLeastProgram(
     int heapSize;
     // pair_t *outputPortion = (pair_t *) calloc( k,sizeof(pair_t) ); 
     heapSize = 0;
+    int nElements = nTotalElements / nThreads;
     
-    for( int i=0; i< k; i++ ) {
-        printf("inserting %f\n", Input[i]);
+    int firstFromRange = myIndex * nElements;
+    int lastFromRange = MIN( (myIndex+1) * nElements, nTotalElements ) - 1;
+
+    
+    // insert firstFromRange k elements from the range
+    for( int i=firstFromRange; i< firstFromRange + k; i++ ) {
         pair_t inputTuple; 
         inputTuple.key = Input[i];
         inputTuple.val = i;
 
-        insert( (pair_t *) Output, &heapSize, inputTuple );
-        drawHeapTree( Output, heapSize, k );
+        insert( (pair_t *) parallelFindKLeast_partialOutput[myIndex], &heapSize, inputTuple );
+        // drawHeapTree( Output, heapSize, k );
         
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
@@ -121,18 +124,18 @@ pair_t * findKLeastProgram(
 //          OBS: note que o Max-Heap tem tamanho k
 //          ● Para cada elemento e do conjunto C restante, aplicar
 //          a operação decreaseMax( h, e ) no heap.
-    for (int i = k;i < nTotalElements;++i){
+    for (int i = firstFromRange + k;i < lastFromRange;++i){
         pair_t inputTuple; 
         inputTuple.key = Input[i];
         inputTuple.val = i;
 
-        decreaseMax(Output, heapSize, inputTuple); 
+        decreaseMax(parallelFindKLeast_partialOutput[myIndex], heapSize, inputTuple); 
 
         // printf("decreaseMax %f \n", Input[i]);
 
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
-        if( isMaxHeap( Output, heapSize ) )
+        if( isMaxHeap( parallelFindKLeast_partialOutput[myIndex], heapSize ) )
             printf( "is a heap!\n" );
         else
             printf( "is NOT a heap!\n" );
@@ -144,14 +147,14 @@ pair_t * findKLeastProgram(
 
     //          ● Ao final, o Max-Heap h contém o subconjunto de k
     //          menores elementos de C
-    drawHeapTree( Output, heapSize, k );
+    // drawHeapTree( Output, heapSize, k );
     // if( !isMaxHeap( Output, heapSize ) )
     //     printf("NÃO É UMA HEAP");
     // else 
         // printf("É UMA HEAP");
 
 
-    return Output; 
+    // return Output; 
 }
 
 void *findKLeastPartialElmts(void *ptr)
@@ -166,44 +169,23 @@ void *findKLeastPartialElmts(void *ptr)
     #if DEBUG == 1
       printf("thread %d here! first=%d last=%d\n", myIndex, first, last );
     #endif
-//    if( myIndex != 0 )
-    // parallelFindKLeast_partial[ myIndex ] = malloc( sizeof(pair_t) * k ); 
+    
+    // all worker threads will be waiting here for the caller thread
+            
 
-    // pair_t *outputPortion = (pair_t *) calloc( k,sizeof(pair_t) ); 
-    float inputParc[MAX_SIZE];
-    int counter = 0;
-    while( 1 ) {
-        ++counter;
-        // all worker threads will be waiting here for the caller thread
-        pthread_barrier_wait( &parallelFindKLeast_barrier );    
-        printf("counter %d \n",counter); 
+    // store my result in the array of partial found k least elements
+    findKLeastProgram(myIndex);     
+
+    // if( myIndex != 0 )
+    pthread_barrier_wait( &parallelFindKLeast_barrier );    
+    
+    // if( myIndex == 0 )
+    //     return NULL;           // return to caller thread
         
 
-        for (int i=first; i < last ; i++){   
-            // insert first k elements
-            inputParc[i-first] = Input[i]; 
-        }
-
-       // store my result in the array of partial found k least elements
-       
-
-        findKLeastProgram(inputParc,parallelFindKLeast_partial[ myIndex ], last - first, k );     
-
-        for (int i=0; i <  k; i++){   
-            // insert first k elements
-            printf("myIndex %d i: %d (%d, %f) \n",myIndex,i,parallelFindKLeast_partial[ myIndex ][i].val,parallelFindKLeast_partial[ myIndex ][i].key);
-        }
-        // drawHeapTree( parallelFindKLeast_partial[ myIndex ], k, k );
-
-       pthread_barrier_wait( &parallelFindKLeast_barrier );    
-       if( myIndex == 0 )
-          return NULL;           // return to caller thread
-          
-    }
-    
     // NEVER HERE!
     if( myIndex != 0 )
-          pthread_exit( NULL );
+        pthread_exit( NULL );
 }
 
 
@@ -214,25 +196,22 @@ pair_t * parallel_findKLeast(
     int k, 
     int nThreads)
 {
+    pthread_barrier_init( &parallelFindKLeast_barrier, NULL, nThreads );
 
     static int initialized = 0;
     int parallelFindKLeast_nTotalElements = nTotalElmts;
     int parallelFindKLeast_nThreads = nThreads;
     
-    if( ! initialized ) { 
-       pthread_barrier_init( &parallelFindKLeast_barrier, NULL, nThreads );
-       // thread 0 will be the caller thread
-    
-       // cria todas as outra threds trabalhadoras
-       parallelFindKLeast_thread_id[0] = 0;
-       for( int i=1; i < nThreads; i++ ) {
-         parallelFindKLeast_thread_id[i] = i;
-         pthread_create( &parallelFindKLeast_Thread[i], NULL, 
-                      findKLeastPartialElmts, &parallelFindKLeast_thread_id[i]);
-       }
 
-       initialized = 1;
+
+    // cria todas as outra threds trabalhadoras
+    parallelFindKLeast_thread_id[0] = 0;
+    for( int i=1; i < nThreads; i++ ) {
+        parallelFindKLeast_thread_id[i] = i;
+        pthread_create( &parallelFindKLeast_Thread[i], NULL, 
+                    findKLeastPartialElmts, &parallelFindKLeast_thread_id[i]);
     }
+
 
     // above, int this version, all other worker threads from 1 to nThreads will 
     //   start working imediatelly (no barriers to start working)
@@ -242,8 +221,12 @@ pair_t * parallel_findKLeast(
         
     // chegando aqui todas as threads sincronizaram, 
     //  na barreira no final da funçao findKLeastPartialElmts (até a 0)
-    //  entao o vertor de somasPartcias estah pronto
+    //  entao as outras heaps estao prontas
     
+    for (int myIndex = 0;myIndex < nThreads;++myIndex){
+        printf("myIndex %d: \n",myIndex);
+        drawHeapTree( parallelFindKLeast_partialOutput[ myIndex ], k, k );
+    }
     // a thread chamadora faz, entao, a reduçao da soma global
     // EFETUAR CONCATENCAO
     // isso é necessário ?
@@ -254,62 +237,6 @@ pair_t * parallel_findKLeast(
     
     // return globalSum; 
     // RETORNAR OBJETO CONCATENADO
-}
-
-
-
-
-
-float parallel_FindKLeastSum( float InputVector[], int nTotalElements, int nThreads )
-{
-
-    static int initialized = 0;
-    parallelFindKLeast_nTotalElements = nTotalElements;
-    parallelFindKLeast_nThreads = nThreads;
-    
-    if( ! initialized ) { 
-       pthread_barrier_init( &parallelFindKLeast_barrier, NULL, nThreads );
-       // thread 0 will be the caller thread
-    
-       // cria todas as outra threds trabalhadoras
-       parallelFindKLeast_thread_id[0] = 0;
-       for( int i=1; i < nThreads; i++ ) {
-         parallelFindKLeast_thread_id[i] = i;
-         pthread_create( &parallelFindKLeast_Thread[i], NULL, 
-                      findKLeastPartialElmts, &parallelFindKLeast_thread_id[i]);
-       }
-
-       initialized = 1;
-    }
-
-    // above, int this version, all other worker threads from 1 to nThreads will 
-    //   start working imediatelly (no barriers to start working)
-    
-    // caller thread will be thread 0, and will start working on its chunk
-    findKLeastPartialElmts( &parallelFindKLeast_thread_id[0] ); 
-        
-    // chegando aqui todas as threads sincronizaram, 
-    //  na barreira no final da funçao findKLeastPartialElmts (até a 0)
-    //  entao o vertor de somasPartcias estah pronto
-    
-    // a thread chamadora faz, entao, a reduçao da soma global
-    
-    // CONCATENAR 
-    // float globalSum = 0;
-    // for( int i=0; i<nThreads ; i++ ) {
-    //     //printf( "globalSum = %f\n", globalSum );
-    //     globalSum += parallelFindKLeast_partialSum[i];
-    // }    
-    
-    // isso é necessário ?
-    //pthread_barrier_destroy( &myBarrier );
-    
-    // obs: como as threads trabalhadoras sincronizaram e irão terminar,
-    //      não é necessário esperar o término delas
-    
-    // return globalSum;
-    float teste;
-    return teste; 
 }
 
 
@@ -347,6 +274,7 @@ int main (int argc, char *argv[]) {
         return 0;
     } else {
         nThreads = atoi( argv[3] );
+
         if( nThreads == 0 ) {
             printf( "usage: %s <nTotalElements> <k> <nThreads>\n" ,
                 argv[0] );
@@ -367,8 +295,6 @@ int main (int argc, char *argv[]) {
         k = atoi( argv[2] ); 
     }
 
-    pair_t *outputPortions[nThreads];
-    int parallelFindKLeast_thread_id[nThreads];
     // usage: ./acharKMenores <nTotalElements> <k> <nThreads>
     // k elementos
     
@@ -392,17 +318,16 @@ int main (int argc, char *argv[]) {
     for( int n = 0 ; n < nTotalElements; n++ ) {   
       printf("%f ", Input[n]);
     }
-
     printf("\n\n");
 
-    for (int i=0;i < nThreads;++i){
+    for (int i=1;i < nThreads;++i){
         // TODO CHECK IF IS CORRECT
-        const float *InputPortion;
-
         if (USAR_PARALELO){
-            outputPortions[i] = parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
+            parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
         } else{
-            outputPortions[i] = findKLeastProgram(Input, Output, nTotalElements, k);
+            parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
+
+            // findKLeastProgram(0);
         } 
     }
 
