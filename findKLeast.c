@@ -160,19 +160,7 @@ void findKLeastProgram(
 void *findKLeastPartialElmts(void *ptr)
 {
     int myIndex = *((int *)ptr);
-    int nElements = nTotalElements / nThreads;
     
-    // assume que temos pelo menos 1 elemento por thhread
-    int first = myIndex * nElements;
-    int last = MIN( (myIndex+1) * nElements, nTotalElements ) - 1;
-
-    #if DEBUG == 1
-      printf("thread %d here! first=%d last=%d\n", myIndex, first, last );
-    #endif
-    
-    // all worker threads will be waiting here for the caller thread
-            
-
     // store my result in the array of partial found k least elements
     findKLeastProgram(myIndex);     
 
