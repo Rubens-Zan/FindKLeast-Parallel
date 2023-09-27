@@ -57,6 +57,7 @@ void verifyOutput(
 )
 {
     qsort(Input, nTotalElements, sizeof(float), cmpfunc);
+
     #ifdef DEBUG
     for (int i=0;i < k;++i){
         printf("INPUT[%d]: %f \n", i,Input[i]);
@@ -65,7 +66,7 @@ void verifyOutput(
     #endif
     int foundElements = 0;
     for (int i=0;i < k;++i){
-        for (int j = 0 ;j < k;++j)
+        for (int j = 0;j < k;++j)
             if (Input[i] == Output[j].key)
                 ++foundElements;
     }
@@ -91,9 +92,7 @@ void findKLeastProgram(
 //      seria:
 //          ● Extrair k elementos de C e criar um Max-Heap h com
 //          esses elementos.
-    // pair_t * heap = malloc(sizeof(pair_t) * k);
     int heapSize;
-    // pair_t *outputPortion = (pair_t *) calloc( k,sizeof(pair_t) ); 
     heapSize = 0;
     int nElements = nTotalElements / nThreads;
     
@@ -108,7 +107,6 @@ void findKLeastProgram(
         inputTuple.val = i;
 
         insert( (pair_t *) parallelFindKLeast_partialOutput[myIndex], &heapSize, inputTuple );
-        // drawHeapTree( Output, heapSize, k );
         
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
@@ -124,14 +122,12 @@ void findKLeastProgram(
 //          OBS: note que o Max-Heap tem tamanho k
 //          ● Para cada elemento e do conjunto C restante, aplicar
 //          a operação decreaseMax( h, e ) no heap.
-    for (int i = firstFromRange + k;i < lastFromRange;++i){
+    for (int i = firstFromRange + k;i <= lastFromRange;++i){
         pair_t inputTuple; 
         inputTuple.key = Input[i];
         inputTuple.val = i;
 
         decreaseMax(parallelFindKLeast_partialOutput[myIndex], heapSize, inputTuple); 
-
-        // printf("decreaseMax %f \n", Input[i]);
 
         #ifdef DEBUG 
         printf("------Max-Heap Tree------ ");
@@ -142,19 +138,6 @@ void findKLeastProgram(
         #endif   
     }
 
-
-   
-
-    //          ● Ao final, o Max-Heap h contém o subconjunto de k
-    //          menores elementos de C
-    // drawHeapTree( Output, heapSize, k );
-    // if( !isMaxHeap( Output, heapSize ) )
-    //     printf("NÃO É UMA HEAP");
-    // else 
-        // printf("É UMA HEAP");
-
-
-    // return Output; 
 }
 
 void *findKLeastPartialElmts(void *ptr)
@@ -163,14 +146,8 @@ void *findKLeastPartialElmts(void *ptr)
 
     // store my result in the array of partial found k least elements
     findKLeastProgram(myIndex);     
-
-    // if( myIndex != 0 )
     pthread_barrier_wait( &parallelFindKLeast_barrier );    
     
-    // if( myIndex == 0 )
-    //     return NULL;           // return to caller thread
-        
-
     // NEVER HERE!
     if( myIndex != 0 )
         pthread_exit( NULL );
@@ -191,7 +168,6 @@ pair_t * parallel_findKLeast(
     int parallelFindKLeast_nThreads = nThreads;
     
 
-
     // cria todas as outra threds trabalhadoras
     parallelFindKLeast_thread_id[0] = 0;
     for( int i=1; i < nThreads; i++ ) {
@@ -210,44 +186,37 @@ pair_t * parallel_findKLeast(
     // chegando aqui todas as threads sincronizaram, 
     //  na barreira no final da funçao findKLeastPartialElmts (até a 0)
     //  entao as outras heaps estao prontas
+    concatenateOutputPortions(); 
     
-    for (int myIndex = 0;myIndex < nThreads;++myIndex){
-        printf("myIndex %d: \n",myIndex);
-        drawHeapTree( parallelFindKLeast_partialOutput[ myIndex ], k, k );
-    }
-    // a thread chamadora faz, entao, a reduçao da soma global
-    // EFETUAR CONCATENCAO
-    // isso é necessário ?
-    //pthread_barrier_destroy( &myBarrier );
-    
-    // obs: como as threads trabalhadoras sincronizaram e irão terminar,
-    //      não é necessário esperar o término delas
-    
-    // return globalSum; 
-    // RETORNAR OBJETO CONCATENADO
 }
 
 
-pair_t * concatenateOutputPortions(
-    const pair_t *Output,
-    pair_t **outputPortions,
-    int nThreads,
-    int k
-){
-    pair_t concatenatedOutput[k];
-    int idx = 0;
+void concatenateOutputPortions(){
     int heapSize = 0;
-    
+
+
     for (int i=0;i < k;++i){
-        insert( (pair_t *) concatenatedOutput, &heapSize, outputPortions[0][i] );
+        insert( (pair_t *) Output, &heapSize, parallelFindKLeast_partialOutput[ 0 ][i] );
     }
-    for (int i=1;i < nThreads;++i){ // faz o decreasce a partir da 2a thread
+
+    for (int idx=1;idx < nThreads;++idx){ // faz o decreasce a partir da 2a thread
+
         for (int j=0;j < k;++j){ // cada thread tera uma porção de K menores considerando as porções que cada uma é responsável
-            decreaseMax(concatenatedOutput, heapSize, outputPortions[i][j]); 
+            decreaseMax((pair_t *) Output, heapSize, parallelFindKLeast_partialOutput[ idx][j]); 
         }
     }
 
+    for (int  i = 0;i < nThreads;++i){
+        printf("Heap parciais finais: \n"); 
+        drawHeapTree( parallelFindKLeast_partialOutput[ i], heapSize, k );
+    }
 
+    printf("Heap global final: \n"); 
+    drawHeapTree( Output, heapSize, k );
+
+
+
+    verifyOutput(Input, Output, nTotalElements, k);
 
 }
 
@@ -312,22 +281,20 @@ int main (int argc, char *argv[]) {
         parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
     } else{
         parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
-
-        // findKLeastProgram(0);
     } 
 
-    // jam from the calculation if the number is not multiple from nThreads
 
     // SE FOR PARALELO FAZER CONCATENACAO E ORDENACAO
     // concatenateOutputPortions(Output,outputPortions, nThreads,k );
 
     // Measuring time after threads finished...
+    
     chrono_stop( &runningTime );
 
 
 
 
-    chrono_reportTime( &runningTime, "runningTime" );
+    // chrono_reportTime( &runningTime, "runningTime" );
     
     // calcular e imprimir a VAZAO (numero de operacoes/s)
 
@@ -339,9 +306,9 @@ int main (int argc, char *argv[]) {
     double total_time_in_seconds = (double) chrono_gettotal( &runningTime ) /
                                       ((double)1000*1000*1000);
     printf( "total_time_in_seconds: %lf s\n", total_time_in_seconds );
-                                  
+          
     double OPS = (nTotalElements)/total_time_in_seconds;
-    printf( "Throughput: %lf OP/s\n", OPS );
+    printf( "Throughput: %lf MOPs/s\n", OPS );
 
 
     // verifyOutput(Input, outputPortions[0], nTotalElements, k);
