@@ -160,7 +160,7 @@ void findKLeastProgram(
 void *findKLeastPartialElmts(void *ptr)
 {
     int myIndex = *((int *)ptr);
-    
+
     // store my result in the array of partial found k least elements
     findKLeastProgram(myIndex);     
 
@@ -308,17 +308,13 @@ int main (int argc, char *argv[]) {
     }
     printf("\n\n");
 
-    for (int i=1;i < nThreads;++i){
-        // TODO CHECK IF IS CORRECT
-        if (USAR_PARALELO){
-            parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
-        } else{
-            parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
+    if (USAR_PARALELO){
+        parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
+    } else{
+        parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
 
-            // findKLeastProgram(0);
-        } 
-    }
-
+        // findKLeastProgram(0);
+    } 
 
     // jam from the calculation if the number is not multiple from nThreads
 
