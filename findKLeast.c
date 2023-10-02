@@ -256,6 +256,8 @@ int main (int argc, char *argv[]) {
     // k elementos
     
     chrono_reset( &runningTime );
+    chrono_start( &runningTime );
+
 
     for( int i = 0; i < nTotalElements; i++ ){
      
