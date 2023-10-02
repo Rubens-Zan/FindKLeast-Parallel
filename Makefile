@@ -1,7 +1,7 @@
 # GRR20206147 Rubens Zandomenighi Laszlo 
 
 DEBUG_FLAGS = -g -DDEBUG
-CFLAGS = -lm -lpthread 
+CFLAGS = -lm -lpthread -O3
 
 .PHONY : all debug clean purge
 

@@ -1,0 +1,168 @@
+Running 10 times with 100000000 elements to find the 1 least, using 1 threads: 
+0.132237
+Running 10 times with 100000000 elements to find the 2 least, using 1 threads: 
+0.132330
+Running 10 times with 100000000 elements to find the 3 least, using 1 threads: 
+0.132215
+Running 10 times with 100000000 elements to find the 4 least, using 1 threads: 
+0.131741
+Running 10 times with 100000000 elements to find the 5 least, using 1 threads: 
+0.132029
+Running 10 times with 100000000 elements to find the 6 least, using 1 threads: 
+0.133957
+Running 10 times with 100000000 elements to find the 7 least, using 1 threads: 
+0.131586
+Running 10 times with 100000000 elements to find the 8 least, using 1 threads: 
+0.132050
+Running 10 times with 100000000 elements to find the 9 least, using 1 threads: 
+0.132295
+Running 10 times with 100000000 elements to find the 10 least, using 1 threads: 
+0.132075
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 2 threads: 
+0.072359
+Running 10 times with 100000000 elements to find the 2 least, using 2 threads: 
+0.072259
+Running 10 times with 100000000 elements to find the 3 least, using 2 threads: 
+0.068992
+Running 10 times with 100000000 elements to find the 4 least, using 2 threads: 
+0.069502
+Running 10 times with 100000000 elements to find the 5 least, using 2 threads: 
+0.072235
+Running 10 times with 100000000 elements to find the 6 least, using 2 threads: 
+0.069073
+Running 10 times with 100000000 elements to find the 7 least, using 2 threads: 
+0.068254
+Running 10 times with 100000000 elements to find the 8 least, using 2 threads: 
+0.072230
+Running 10 times with 100000000 elements to find the 9 least, using 2 threads: 
+0.072676
+Running 10 times with 100000000 elements to find the 10 least, using 2 threads: 
+0.072673
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 3 threads: 
+0.049564
+Running 10 times with 100000000 elements to find the 2 least, using 3 threads: 
+0.048236
+Running 10 times with 100000000 elements to find the 3 least, using 3 threads: 
+0.049931
+Running 10 times with 100000000 elements to find the 4 least, using 3 threads: 
+0.047844
+Running 10 times with 100000000 elements to find the 5 least, using 3 threads: 
+0.050097
+Running 10 times with 100000000 elements to find the 6 least, using 3 threads: 
+0.049780
+Running 10 times with 100000000 elements to find the 7 least, using 3 threads: 
+0.066976
+Running 10 times with 100000000 elements to find the 8 least, using 3 threads: 
+0.049888
+Running 10 times with 100000000 elements to find the 9 least, using 3 threads: 
+0.057232
+Running 10 times with 100000000 elements to find the 10 least, using 3 threads: 
+0.049801
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 4 threads: 
+0.071330
+Running 10 times with 100000000 elements to find the 2 least, using 4 threads: 
+0.038048
+Running 10 times with 100000000 elements to find the 3 least, using 4 threads: 
+0.038778
+Running 10 times with 100000000 elements to find the 4 least, using 4 threads: 
+0.075958
+Running 10 times with 100000000 elements to find the 5 least, using 4 threads: 
+0.039044
+Running 10 times with 100000000 elements to find the 6 least, using 4 threads: 
+0.038883
+Running 10 times with 100000000 elements to find the 7 least, using 4 threads: 
+0.071828
+Running 10 times with 100000000 elements to find the 8 least, using 4 threads: 
+0.037434
+Running 10 times with 100000000 elements to find the 9 least, using 4 threads: 
+0.042607
+Running 10 times with 100000000 elements to find the 10 least, using 4 threads: 
+0.037368
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 5 threads: 
+0.056213
+Running 10 times with 100000000 elements to find the 2 least, using 5 threads: 
+0.055866
+Running 10 times with 100000000 elements to find the 3 least, using 5 threads: 
+0.055896
+Running 10 times with 100000000 elements to find the 4 least, using 5 threads: 
+0.056012
+Running 10 times with 100000000 elements to find the 5 least, using 5 threads: 
+0.056007
+Running 10 times with 100000000 elements to find the 6 least, using 5 threads: 
+0.055853
+Running 10 times with 100000000 elements to find the 7 least, using 5 threads: 
+0.056028
+Running 10 times with 100000000 elements to find the 8 least, using 5 threads: 
+0.055922
+Running 10 times with 100000000 elements to find the 9 least, using 5 threads: 
+0.055957
+Running 10 times with 100000000 elements to find the 10 least, using 5 threads: 
+0.056069
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 6 threads: 
+0.047440
+Running 10 times with 100000000 elements to find the 2 least, using 6 threads: 
+0.047184
+Running 10 times with 100000000 elements to find the 3 least, using 6 threads: 
+0.047426
+Running 10 times with 100000000 elements to find the 4 least, using 6 threads: 
+0.047215
+Running 10 times with 100000000 elements to find the 5 least, using 6 threads: 
+0.047338
+Running 10 times with 100000000 elements to find the 6 least, using 6 threads: 
+0.047299
+Running 10 times with 100000000 elements to find the 7 least, using 6 threads: 
+0.047409
+Running 10 times with 100000000 elements to find the 8 least, using 6 threads: 
+0.047172
+Running 10 times with 100000000 elements to find the 9 least, using 6 threads: 
+0.048928
+Running 10 times with 100000000 elements to find the 10 least, using 6 threads: 
+0.047673
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 7 threads: 
+0.041393
+Running 10 times with 100000000 elements to find the 2 least, using 7 threads: 
+0.041705
+Running 10 times with 100000000 elements to find the 3 least, using 7 threads: 
+0.041491
+Running 10 times with 100000000 elements to find the 4 least, using 7 threads: 
+0.041316
+Running 10 times with 100000000 elements to find the 5 least, using 7 threads: 
+0.041784
+Running 10 times with 100000000 elements to find the 6 least, using 7 threads: 
+0.041356
+Running 10 times with 100000000 elements to find the 7 least, using 7 threads: 
+0.060666
+Running 10 times with 100000000 elements to find the 8 least, using 7 threads: 
+0.041606
+Running 10 times with 100000000 elements to find the 9 least, using 7 threads: 
+0.041451
+Running 10 times with 100000000 elements to find the 10 least, using 7 threads: 
+0.041375
+******************************************************************************
+Running 10 times with 100000000 elements to find the 1 least, using 8 threads: 
+0.038559
+Running 10 times with 100000000 elements to find the 2 least, using 8 threads: 
+0.036940
+Running 10 times with 100000000 elements to find the 3 least, using 8 threads: 
+0.036999
+Running 10 times with 100000000 elements to find the 4 least, using 8 threads: 
+0.036880
+Running 10 times with 100000000 elements to find the 5 least, using 8 threads: 
+0.037031
+Running 10 times with 100000000 elements to find the 6 least, using 8 threads: 
+0.036933
+Running 10 times with 100000000 elements to find the 7 least, using 8 threads: 
+0.036866
+Running 10 times with 100000000 elements to find the 8 least, using 8 threads: 
+0.036864
+Running 10 times with 100000000 elements to find the 9 least, using 8 threads: 
+0.036856
+Running 10 times with 100000000 elements to find the 10 least, using 8 threads: 
+0.036920
+******************************************************************************

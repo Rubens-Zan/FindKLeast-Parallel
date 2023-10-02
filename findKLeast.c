@@ -15,25 +15,24 @@
 
 #include "findKLeast.h"
 #define MAX_THREADS 8
-
+#define MAX_K_ELEMENTS 2048
 
 #define MIN(a, b) ((a < b ? a:b))
 
 #if TYPE == FLOAT
-   #define MAX_TOTAL_ELEMENTS (10000000)  // if each float takes 4 bytes
-                                            // will have a maximum 500 million FLOAT elements
-                                            // which fits in 2 GB of RAM
+   #define MAX_TOTAL_ELEMENTS (2000*1000*1000)  // if each float takes 4 bytes
+
 #endif   
 
 /**GLOBALS**/
-pthread_t parallelFindKLeast_Thread[ MAX_THREADS ];
 int nTotalElements, k, nThreads; 
-float Input[MAX_SIZE];
-pair_t Output[MAX_SIZE];
 pthread_barrier_t parallelFindKLeast_barrier;
 
-pair_t parallelFindKLeast_partialOutput[MAX_THREADS][MAX_SIZE]; 
-int parallelFindKLeast_thread_id[ MAX_THREADS ];
+pthread_t parallelFindKLeast_Thread[MAX_THREADS];
+float *Input;
+pair_t Output[MAX_K_ELEMENTS];
+pair_t parallelFindKLeast_partialOutput[MAX_THREADS][MAX_K_ELEMENTS]; 
+int *parallelFindKLeast_thread_id;
 int parallelFindKLeast_nTotalElements;
 int parallelFindKLeast_nThreads;
 /**GLOBALS**/
@@ -242,18 +241,39 @@ int main (int argc, char *argv[]) {
 
         nTotalElements = atoi( argv[1] ); 
         if( nTotalElements > MAX_TOTAL_ELEMENTS ) {  
-            printf( "usage: %s <nTotalElements> <k> <nThreads>\n" ,
-                argv[0] );
             printf( "<nTotalElements> must be up to %d\n", MAX_TOTAL_ELEMENTS );
             return 0;
         }
-
+        if (k > MAX_K_ELEMENTS){
+            printf( "<k> must be up to %d\n", MAX_K_ELEMENTS );
+            return 0;
+        }
         k = atoi( argv[2] ); 
     }
 
     // usage: ./acharKMenores <nTotalElements> <k> <nThreads>
     // k elementos
+    // pthread_t *parallelFindKLeast_Thread;
+    // float *Input;
+    // pair_t *Output;
+    // pair_t **parallelFindKLeast_partialOutput; 
+    // int *parallelFindKLeast_thread_id;
     
+    Input = malloc(nTotalElements * sizeof(pair_t));
+    // Output = malloc(k * sizeof(pair_t));
+    parallelFindKLeast_thread_id = malloc(nThreads * sizeof(int));
+
+    // parallelFindKLeast_partialOutput = malloc(nThreads * sizeof(pair_t *));
+    // aloca um vetor de LIN ponteiros para linhas
+    int linhas = nThreads;
+    int cols = nTotalElements;
+
+    // parallelFindKLeast_partialOutput = malloc (linhas * sizeof (pair_t*)) ;
+
+    // aloca cada uma das linhas (vetores de COL inteiros)
+    // for (int i=0; i < linhas; i++)
+    //     parallelFindKLeast_partialOutput[i] = malloc (cols * sizeof (pair_t)) ;
+
 
 
     for( int i = 0; i < nTotalElements; i++ ){
@@ -270,7 +290,7 @@ int main (int argc, char *argv[]) {
         ++inputSize;
     }
 
-
+    
     chrono_reset( &runningTime );
     chrono_start( &runningTime );
 
@@ -293,8 +313,12 @@ int main (int argc, char *argv[]) {
     
     chrono_stop( &runningTime );
     
+    #ifdef DEBUG
+
     verifyOutput(Input, Output, nTotalElements, k);
-    
+
+    #endif
+
     chrono_reportTime( &runningTime, "runningTime" );
     
     // calcular e imprimir a VAZAO (numero de operacoes/s)
@@ -310,6 +334,7 @@ int main (int argc, char *argv[]) {
           
     double OPS = (nTotalElements)/total_time_in_seconds;
     printf( "Throughput: %lf MOPs/s\n", OPS );
+    
 
 
     return 1; 
