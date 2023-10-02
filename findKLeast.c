@@ -14,24 +14,22 @@
 
 
 #include "findKLeast.h"
-#define MAX_THREADS 64
+#define MAX_THREADS 8
 
 
 #define MIN(a, b) ((a < b ? a:b))
 
 #if TYPE == FLOAT
-   #define MAX_TOTAL_ELEMENTS (500*1000*1000)  // if each float takes 4 bytes
+   #define MAX_TOTAL_ELEMENTS (10000000)  // if each float takes 4 bytes
                                             // will have a maximum 500 million FLOAT elements
                                             // which fits in 2 GB of RAM
 #endif   
 
 /**GLOBALS**/
 pthread_t parallelFindKLeast_Thread[ MAX_THREADS ];
-float inputParc[MAX_THREADS][MAX_SIZE];
 int nTotalElements, k, nThreads; 
 float Input[MAX_SIZE];
 pair_t Output[MAX_SIZE];
-pair_t parallel_output[MAX_SIZE];
 pthread_barrier_t parallelFindKLeast_barrier;
 
 pair_t parallelFindKLeast_partialOutput[MAX_THREADS][MAX_SIZE]; 
@@ -64,6 +62,7 @@ void verifyOutput(
         printf("OUTPUT[%d]: %f \n", Output[i].val,Output[i].key);
     }
     #endif
+
     int foundElements = 0;
     for (int i=0;i < k;++i){
         for (int j = 0;j < k;++j)
@@ -187,7 +186,6 @@ pair_t * parallel_findKLeast(
     //  na barreira no final da funçao findKLeastPartialElmts (até a 0)
     //  entao as outras heaps estao prontas
     concatenateOutputPortions(); 
-    
 }
 
 
@@ -206,6 +204,8 @@ void concatenateOutputPortions(){
         }
     }
 
+    #ifdef DEBUG
+
     for (int  i = 0;i < nThreads;++i){
         printf("Heap parciais finais: \n"); 
         drawHeapTree( parallelFindKLeast_partialOutput[ i], heapSize, k );
@@ -214,9 +214,8 @@ void concatenateOutputPortions(){
     printf("Heap global final: \n"); 
     drawHeapTree( Output, heapSize, k );
 
+    #endif
 
-
-    verifyOutput(Input, Output, nTotalElements, k);
 
 }
 
@@ -255,8 +254,6 @@ int main (int argc, char *argv[]) {
     // usage: ./acharKMenores <nTotalElements> <k> <nThreads>
     // k elementos
     
-    chrono_reset( &runningTime );
-    chrono_start( &runningTime );
 
 
     for( int i = 0; i < nTotalElements; i++ ){
@@ -274,16 +271,19 @@ int main (int argc, char *argv[]) {
     }
 
 
+    chrono_reset( &runningTime );
+    chrono_start( &runningTime );
+
+    #ifdef DEBUG
+
     for( int n = 0 ; n < nTotalElements; n++ ) {   
       printf("%f ", Input[n]);
     }
     printf("\n\n");
-
-    if (USAR_PARALELO){
-        parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
-    } else{
-        parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
-    } 
+    
+    #endif
+    
+    parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
 
 
     // SE FOR PARALELO FAZER CONCATENACAO E ORDENACAO
@@ -292,11 +292,10 @@ int main (int argc, char *argv[]) {
     // Measuring time after threads finished...
     
     chrono_stop( &runningTime );
-
-
-
-
-    // chrono_reportTime( &runningTime, "runningTime" );
+    
+    verifyOutput(Input, Output, nTotalElements, k);
+    
+    chrono_reportTime( &runningTime, "runningTime" );
     
     // calcular e imprimir a VAZAO (numero de operacoes/s)
 
@@ -307,13 +306,11 @@ int main (int argc, char *argv[]) {
 
     double total_time_in_seconds = (double) chrono_gettotal( &runningTime ) /
                                       ((double)1000*1000*1000);
-    printf( "total_time_in_seconds: %lf s\n", total_time_in_seconds );
+    printf( "\nTotal time in seconds: %lf s\n", total_time_in_seconds );
           
     double OPS = (nTotalElements)/total_time_in_seconds;
     printf( "Throughput: %lf MOPs/s\n", OPS );
 
-
-    // verifyOutput(Input, outputPortions[0], nTotalElements, k);
 
     return 1; 
 }

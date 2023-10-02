@@ -1,0 +1,648 @@
+Running 10 times with 100000 elements to find the 1 least, using 1 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 36778460 ns for 1 ops 
+        ==> each op takes 36778460 ns
+total_time_in_seconds: 0.036778 s
+Throughput: 2718982.795908 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 1 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19700956 ns for 1 ops 
+        ==> each op takes 19700956 ns
+total_time_in_seconds: 0.019701 s
+Throughput: 5075895.809320 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 1 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19471653 ns for 1 ops 
+        ==> each op takes 19471653 ns
+total_time_in_seconds: 0.019472 s
+Throughput: 5135670.813361 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 1 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 19438361 ns for 1 ops 
+        ==> each op takes 19438361 ns
+total_time_in_seconds: 0.019438 s
+Throughput: 5144466.655393 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 1 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19449999 ns for 1 ops 
+        ==> each op takes 19449999 ns
+total_time_in_seconds: 0.019450 s
+Throughput: 5141388.439146 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 1 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19090602 ns for 1 ops 
+        ==> each op takes 19090602 ns
+total_time_in_seconds: 0.019091 s
+Throughput: 5238179.497954 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 1 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19409787 ns for 1 ops 
+        ==> each op takes 19409787 ns
+total_time_in_seconds: 0.019410 s
+Throughput: 5152040.050723 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 1 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 19596900 ns for 1 ops 
+        ==> each op takes 19596900 ns
+total_time_in_seconds: 0.019597 s
+Throughput: 5102847.899413 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 1 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19866389 ns for 1 ops 
+        ==> each op takes 19866389 ns
+total_time_in_seconds: 0.019866 s
+Throughput: 5033627.399524 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 1 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 18959642 ns for 1 ops 
+        ==> each op takes 18959642 ns
+total_time_in_seconds: 0.018960 s
+Throughput: 5274361.193107 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 2 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19448667 ns for 1 ops 
+        ==> each op takes 19448667 ns
+total_time_in_seconds: 0.019449 s
+Throughput: 5141740.562477 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 2 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19594326 ns for 1 ops 
+        ==> each op takes 19594326 ns
+total_time_in_seconds: 0.019594 s
+Throughput: 5103518.232778 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 2 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19200054 ns for 1 ops 
+        ==> each op takes 19200054 ns
+total_time_in_seconds: 0.019200 s
+Throughput: 5208318.684937 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 2 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 19158256 ns for 1 ops 
+        ==> each op takes 19158256 ns
+total_time_in_seconds: 0.019158 s
+Throughput: 5219681.791495 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 2 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19248379 ns for 1 ops 
+        ==> each op takes 19248379 ns
+total_time_in_seconds: 0.019248 s
+Throughput: 5195242.674721 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 2 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19224973 ns for 1 ops 
+        ==> each op takes 19224973 ns
+total_time_in_seconds: 0.019225 s
+Throughput: 5201567.773333 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 2 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19537235 ns for 1 ops 
+        ==> each op takes 19537235 ns
+total_time_in_seconds: 0.019537 s
+Throughput: 5118431.548784 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 2 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 19588354 ns for 1 ops 
+        ==> each op takes 19588354 ns
+total_time_in_seconds: 0.019588 s
+Throughput: 5105074.168049 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 2 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19644521 ns for 1 ops 
+        ==> each op takes 19644521 ns
+total_time_in_seconds: 0.019645 s
+Throughput: 5090477.899665 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 2 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19552731 ns for 1 ops 
+        ==> each op takes 19552731 ns
+total_time_in_seconds: 0.019553 s
+Throughput: 5114375.071186 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 3 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19087314 ns for 1 ops 
+        ==> each op takes 19087314 ns
+total_time_in_seconds: 0.019087 s
+Throughput: 5239081.832048 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 3 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19136964 ns for 1 ops 
+        ==> each op takes 19136964 ns
+total_time_in_seconds: 0.019137 s
+Throughput: 5225489.267786 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 3 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19698948 ns for 1 ops 
+        ==> each op takes 19698948 ns
+total_time_in_seconds: 0.019699 s
+Throughput: 5076413.217599 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 3 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 20338637 ns for 1 ops 
+        ==> each op takes 20338637 ns
+total_time_in_seconds: 0.020339 s
+Throughput: 4916750.321076 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 3 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 18764883 ns for 1 ops 
+        ==> each op takes 18764883 ns
+total_time_in_seconds: 0.018765 s
+Throughput: 5329103.304295 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 3 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19144642 ns for 1 ops 
+        ==> each op takes 19144642 ns
+total_time_in_seconds: 0.019145 s
+Throughput: 5223393.574035 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 3 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19082137 ns for 1 ops 
+        ==> each op takes 19082137 ns
+total_time_in_seconds: 0.019082 s
+Throughput: 5240503.199406 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 3 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 18958471 ns for 1 ops 
+        ==> each op takes 18958471 ns
+total_time_in_seconds: 0.018958 s
+Throughput: 5274686.972383 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 3 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 18723219 ns for 1 ops 
+        ==> each op takes 18723219 ns
+total_time_in_seconds: 0.018723 s
+Throughput: 5340961.936086 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 3 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19401813 ns for 1 ops 
+        ==> each op takes 19401813 ns
+total_time_in_seconds: 0.019402 s
+Throughput: 5154157.500642 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 4 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19162098 ns for 1 ops 
+        ==> each op takes 19162098 ns
+total_time_in_seconds: 0.019162 s
+Throughput: 5218635.245473 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 4 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 18996757 ns for 1 ops 
+        ==> each op takes 18996757 ns
+total_time_in_seconds: 0.018997 s
+Throughput: 5264056.386045 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 4 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19205183 ns for 1 ops 
+        ==> each op takes 19205183 ns
+total_time_in_seconds: 0.019205 s
+Throughput: 5206927.734039 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 4 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 19096586 ns for 1 ops 
+        ==> each op takes 19096586 ns
+total_time_in_seconds: 0.019097 s
+Throughput: 5236538.091154 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 4 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19159430 ns for 1 ops 
+        ==> each op takes 19159430 ns
+total_time_in_seconds: 0.019159 s
+Throughput: 5219361.953879 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 4 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 18960654 ns for 1 ops 
+        ==> each op takes 18960654 ns
+total_time_in_seconds: 0.018961 s
+Throughput: 5274079.681007 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 4 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19791136 ns for 1 ops 
+        ==> each op takes 19791136 ns
+total_time_in_seconds: 0.019791 s
+Throughput: 5052767.056929 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 4 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 19059066 ns for 1 ops 
+        ==> each op takes 19059066 ns
+total_time_in_seconds: 0.019059 s
+Throughput: 5246846.828696 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 4 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19021049 ns for 1 ops 
+        ==> each op takes 19021049 ns
+total_time_in_seconds: 0.019021 s
+Throughput: 5257333.599214 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 4 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19223243 ns for 1 ops 
+        ==> each op takes 19223243 ns
+total_time_in_seconds: 0.019223 s
+Throughput: 5202035.889574 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 5 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19178234 ns for 1 ops 
+        ==> each op takes 19178234 ns
+total_time_in_seconds: 0.019178 s
+Throughput: 5214244.439817 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 5 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19068774 ns for 1 ops 
+        ==> each op takes 19068774 ns
+total_time_in_seconds: 0.019069 s
+Throughput: 5244175.634994 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 5 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19198542 ns for 1 ops 
+        ==> each op takes 19198542 ns
+total_time_in_seconds: 0.019199 s
+Throughput: 5208728.871182 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 5 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 19730235 ns for 1 ops 
+        ==> each op takes 19730235 ns
+total_time_in_seconds: 0.019730 s
+Throughput: 5068363.351982 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 5 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19174224 ns for 1 ops 
+        ==> each op takes 19174224 ns
+total_time_in_seconds: 0.019174 s
+Throughput: 5215334.920464 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 5 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19537413 ns for 1 ops 
+        ==> each op takes 19537413 ns
+total_time_in_seconds: 0.019537 s
+Throughput: 5118384.916161 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 5 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19315648 ns for 1 ops 
+        ==> each op takes 19315648 ns
+total_time_in_seconds: 0.019316 s
+Throughput: 5177149.635363 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 5 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 19246213 ns for 1 ops 
+        ==> each op takes 19246213 ns
+total_time_in_seconds: 0.019246 s
+Throughput: 5195827.355750 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 5 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19151759 ns for 1 ops 
+        ==> each op takes 19151759 ns
+total_time_in_seconds: 0.019152 s
+Throughput: 5221452.504702 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 5 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19354733 ns for 1 ops 
+        ==> each op takes 19354733 ns
+total_time_in_seconds: 0.019355 s
+Throughput: 5166694.885432 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 6 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19336462 ns for 1 ops 
+        ==> each op takes 19336462 ns
+total_time_in_seconds: 0.019336 s
+Throughput: 5171576.889299 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 6 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19627417 ns for 1 ops 
+        ==> each op takes 19627417 ns
+total_time_in_seconds: 0.019627 s
+Throughput: 5094913.915570 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 6 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19127475 ns for 1 ops 
+        ==> each op takes 19127475 ns
+total_time_in_seconds: 0.019127 s
+Throughput: 5228081.594669 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 6 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 19124138 ns for 1 ops 
+        ==> each op takes 19124138 ns
+total_time_in_seconds: 0.019124 s
+Throughput: 5228993.850599 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 6 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19104055 ns for 1 ops 
+        ==> each op takes 19104055 ns
+total_time_in_seconds: 0.019104 s
+Throughput: 5234490.792662 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 6 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19177433 ns for 1 ops 
+        ==> each op takes 19177433 ns
+total_time_in_seconds: 0.019177 s
+Throughput: 5214462.227557 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 6 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19143059 ns for 1 ops 
+        ==> each op takes 19143059 ns
+total_time_in_seconds: 0.019143 s
+Throughput: 5223825.512944 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 6 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 19170822 ns for 1 ops 
+        ==> each op takes 19170822 ns
+total_time_in_seconds: 0.019171 s
+Throughput: 5216260.419089 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 6 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19179311 ns for 1 ops 
+        ==> each op takes 19179311 ns
+total_time_in_seconds: 0.019179 s
+Throughput: 5213951.637783 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 6 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19164226 ns for 1 ops 
+        ==> each op takes 19164226 ns
+total_time_in_seconds: 0.019164 s
+Throughput: 5218055.767032 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 7 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19065656 ns for 1 ops 
+        ==> each op takes 19065656 ns
+total_time_in_seconds: 0.019066 s
+Throughput: 5245033.268197 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 7 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19169883 ns for 1 ops 
+        ==> each op takes 19169883 ns
+total_time_in_seconds: 0.019170 s
+Throughput: 5216515.927614 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 7 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19289693 ns for 1 ops 
+        ==> each op takes 19289693 ns
+total_time_in_seconds: 0.019290 s
+Throughput: 5184115.682919 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 7 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 18955959 ns for 1 ops 
+        ==> each op takes 18955959 ns
+total_time_in_seconds: 0.018956 s
+Throughput: 5275385.961744 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 7 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19549804 ns for 1 ops 
+        ==> each op takes 19549804 ns
+total_time_in_seconds: 0.019550 s
+Throughput: 5115140.796296 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 7 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19133056 ns for 1 ops 
+        ==> each op takes 19133056 ns
+total_time_in_seconds: 0.019133 s
+Throughput: 5226556.593991 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 7 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19215555 ns for 1 ops 
+        ==> each op takes 19215555 ns
+total_time_in_seconds: 0.019216 s
+Throughput: 5204117.185270 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 7 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 18879970 ns for 1 ops 
+        ==> each op takes 18879970 ns
+total_time_in_seconds: 0.018880 s
+Throughput: 5296618.585729 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 7 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19473278 ns for 1 ops 
+        ==> each op takes 19473278 ns
+total_time_in_seconds: 0.019473 s
+Throughput: 5135242.253513 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 7 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19216425 ns for 1 ops 
+        ==> each op takes 19216425 ns
+total_time_in_seconds: 0.019216 s
+Throughput: 5203881.575267 MOPs/s
+******************************************************************************
+Running 10 times with 100000 elements to find the 1 least, using 8 threads: 
+
+Output set verifyed correctly 1.
+
+runningTime deltaT(ns): 19109168 ns for 1 ops 
+        ==> each op takes 19109168 ns
+total_time_in_seconds: 0.019109 s
+Throughput: 5233090.210940 MOPs/s
+Running 10 times with 100000 elements to find the 2 least, using 8 threads: 
+
+Output set verifyed correctly 2.
+
+runningTime deltaT(ns): 19238442 ns for 1 ops 
+        ==> each op takes 19238442 ns
+total_time_in_seconds: 0.019238 s
+Throughput: 5197926.110649 MOPs/s
+Running 10 times with 100000 elements to find the 3 least, using 8 threads: 
+
+Output set verifyed correctly 3.
+
+runningTime deltaT(ns): 19160679 ns for 1 ops 
+        ==> each op takes 19160679 ns
+total_time_in_seconds: 0.019161 s
+Throughput: 5219021.726735 MOPs/s
+Running 10 times with 100000 elements to find the 4 least, using 8 threads: 
+
+Output set verifyed correctly 4.
+
+runningTime deltaT(ns): 19102871 ns for 1 ops 
+        ==> each op takes 19102871 ns
+total_time_in_seconds: 0.019103 s
+Throughput: 5234815.227512 MOPs/s
+Running 10 times with 100000 elements to find the 5 least, using 8 threads: 
+
+Output set verifyed correctly 5.
+
+runningTime deltaT(ns): 19166511 ns for 1 ops 
+        ==> each op takes 19166511 ns
+total_time_in_seconds: 0.019167 s
+Throughput: 5217433.678983 MOPs/s
+Running 10 times with 100000 elements to find the 6 least, using 8 threads: 
+
+Output set verifyed correctly 6.
+
+runningTime deltaT(ns): 19222481 ns for 1 ops 
+        ==> each op takes 19222481 ns
+total_time_in_seconds: 0.019222 s
+Throughput: 5202242.103920 MOPs/s
+Running 10 times with 100000 elements to find the 7 least, using 8 threads: 
+
+Output set verifyed correctly 7.
+
+runningTime deltaT(ns): 19214447 ns for 1 ops 
+        ==> each op takes 19214447 ns
+total_time_in_seconds: 0.019214 s
+Throughput: 5204417.280393 MOPs/s
+Running 10 times with 100000 elements to find the 8 least, using 8 threads: 
+
+Output set verifyed correctly 8.
+
+runningTime deltaT(ns): 19108181 ns for 1 ops 
+        ==> each op takes 19108181 ns
+total_time_in_seconds: 0.019108 s
+Throughput: 5233360.517152 MOPs/s
+Running 10 times with 100000 elements to find the 9 least, using 8 threads: 
+
+Output set verifyed correctly 9.
+
+runningTime deltaT(ns): 19055285 ns for 1 ops 
+        ==> each op takes 19055285 ns
+total_time_in_seconds: 0.019055 s
+Throughput: 5247887.921907 MOPs/s
+Running 10 times with 100000 elements to find the 10 least, using 8 threads: 
+
+Output set verifyed correctly 10.
+
+runningTime deltaT(ns): 19003089 ns for 1 ops 
+        ==> each op takes 19003089 ns
+total_time_in_seconds: 0.019003 s
+Throughput: 5262302.355159 MOPs/s
+******************************************************************************
