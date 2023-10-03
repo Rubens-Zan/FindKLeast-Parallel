@@ -14,13 +14,13 @@
 
 
 #include "findKLeast.h"
-#define MAX_THREADS 8
+#define MAX_THREADS 64
 #define MAX_K_ELEMENTS 2048
 
 #define MIN(a, b) ((a < b ? a:b))
 
 #if TYPE == FLOAT
-   #define MAX_TOTAL_ELEMENTS (2000*1000*1000)  // if each float takes 4 bytes
+   #define MAX_TOTAL_ELEMENTS (2000*1000*1000)  // 200 mi of elements
 
 #endif   
 
@@ -30,7 +30,7 @@ pthread_barrier_t parallelFindKLeast_barrier;
 
 pthread_t parallelFindKLeast_Thread[MAX_THREADS];
 float *Input;
-pair_t Output[MAX_K_ELEMENTS];
+pair_t *Output;
 pair_t parallelFindKLeast_partialOutput[MAX_THREADS][MAX_K_ELEMENTS]; 
 int *parallelFindKLeast_thread_id;
 int parallelFindKLeast_nTotalElements;
@@ -47,7 +47,7 @@ int cmpfunc (const void * a, const void * b) {
 
 
 void verifyOutput( 
-    const float *Input, 
+    float *Input, 
     const pair_t *Output,   // pair_t é o tipo de um par (v,p)
     int nTotalElmts,
     int k
@@ -253,26 +253,12 @@ int main (int argc, char *argv[]) {
 
     // usage: ./acharKMenores <nTotalElements> <k> <nThreads>
     // k elementos
-    // pthread_t *parallelFindKLeast_Thread;
-    // float *Input;
-    // pair_t *Output;
-    // pair_t **parallelFindKLeast_partialOutput; 
-    // int *parallelFindKLeast_thread_id;
+   
     
     Input = malloc(nTotalElements * sizeof(pair_t));
-    // Output = malloc(k * sizeof(pair_t));
+    Output = malloc(k * sizeof(pair_t));
     parallelFindKLeast_thread_id = malloc(nThreads * sizeof(int));
 
-    // parallelFindKLeast_partialOutput = malloc(nThreads * sizeof(pair_t *));
-    // aloca um vetor de LIN ponteiros para linhas
-    int linhas = nThreads;
-    int cols = nTotalElements;
-
-    // parallelFindKLeast_partialOutput = malloc (linhas * sizeof (pair_t*)) ;
-
-    // aloca cada uma das linhas (vetores de COL inteiros)
-    // for (int i=0; i < linhas; i++)
-    //     parallelFindKLeast_partialOutput[i] = malloc (cols * sizeof (pair_t)) ;
 
 
 
@@ -313,11 +299,8 @@ int main (int argc, char *argv[]) {
     
     chrono_stop( &runningTime );
     
-    #ifdef DEBUG
-
     verifyOutput(Input, Output, nTotalElements, k);
 
-    #endif
 
     chrono_reportTime( &runningTime, "runningTime" );
     
@@ -330,8 +313,7 @@ int main (int argc, char *argv[]) {
 
     double total_time_in_seconds = (double) chrono_gettotal( &runningTime ) /
                                       ((double)1000*1000*1000);
-    printf( "\nTotal time in seconds: %lf s\n", total_time_in_seconds );
-          
+ 
     double OPS = (nTotalElements)/total_time_in_seconds;
     printf( "Throughput: %lf MOPs/s\n", OPS );
     
