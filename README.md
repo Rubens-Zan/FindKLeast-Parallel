@@ -71,7 +71,7 @@ Execução com nTotalElementos=100.000.000 e k=2048, rodando 10 vezes com 1-8 th
 
 ``` 
 
-## d) a planilha de resultados sumarizando a vazao e aceleração
+## Planilha de resultados sumarizando a vazao e aceleração
 
 Planilha.ods
 
