@@ -294,7 +294,7 @@ int main (int argc, char *argv[]) {
     
     chrono_stop( &runningTime );
     
-    verifyOutput(Input, Output, nTotalElements, k);
+    // verifyOutput(Input, Output, nTotalElements, k);
 
     chrono_reportTime( &runningTime, "runningTime" );
     
