@@ -4,7 +4,6 @@
 - Rubens Zandomenighi Laszlo GRR20206147
 - Gabriel Razzolini Pires De Paula GRR20197155
 
-## Descrição do Processador
 
 
 
@@ -28,9 +27,19 @@ Nessa função são inseridos os K elementos da max-heap obtida a partir da thre
 
 A função de verificação do resultado *verifyOutput* é construída ordenando o vetor input com a função qsort da stdlib e comparadando quantos dos k primeiros elementos foram obtidos no heap-máximo obtido a partir da implementação descrita acima, caso o número de elementos achados = k primeiros elementos do vetor ordenado então está ok. 
 
-## b) a descrição do processador que voce usou, 
-//          seu modelo e caracteristicas importantes para o experimento
-//          COLOQUE EM APENDICE NO RELATORIO A SAIDA DO COMANDO lscpu
+## Descrição do Processador
+```
+Hostname:	j7
+Processador:	i7-4770
+CPU MHz	798,228
+CPU max MHz	3900
+CPU min MHz	800
+L1d cache	 128 KiB
+L1i cache	 128 KiB
+L2 cache	1 MiB
+L3 cache	8 MiB
+flags:	fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon 
+```
 
 ## Descrição dos experimentos e como foram feitas as medidas
 Execução com nTotalElementos=100.000.000 e k=2048, rodando 10 vezes com 1-8 threads, utilizamos a biblioteca fornecida _chrono_, utilizando as funções da biblioteca, contabilizando em segundos o tempo percorrido e a vazão em n° operações/tempo total OPS :
@@ -64,4 +73,13 @@ Execução com nTotalElementos=100.000.000 e k=2048, rodando 10 vezes com 1-8 th
 
 ## d) a planilha de resultados sumarizando a vazao e aceleração
 
-## e) um gráfico (obtido de sua planilha) mostrando:
+Planilha.ods
+
+## Gráfico (obtido da planilha) mostrando:
+
+#  Tempo
+![Alt text](image.png)
+
+#  Vazão 
+
+![Alt text](image-1.png)
