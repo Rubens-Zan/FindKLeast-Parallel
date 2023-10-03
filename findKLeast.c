@@ -76,8 +76,6 @@ void verifyOutput(
 
 
 
-
-
 void findKLeastProgram(
     int myIndex
 ){
@@ -292,15 +290,11 @@ int main (int argc, char *argv[]) {
     parallel_findKLeast(Input, Output, nTotalElements, k, nThreads); 
 
 
-    // SE FOR PARALELO FAZER CONCATENACAO E ORDENACAO
-    // concatenateOutputPortions(Output,outputPortions, nThreads,k );
-
     // Measuring time after threads finished...
     
     chrono_stop( &runningTime );
     
     verifyOutput(Input, Output, nTotalElements, k);
-
 
     chrono_reportTime( &runningTime, "runningTime" );
     
