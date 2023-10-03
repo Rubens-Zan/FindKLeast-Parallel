@@ -313,7 +313,9 @@ int main (int argc, char *argv[]) {
 
     double total_time_in_seconds = (double) chrono_gettotal( &runningTime ) /
                                       ((double)1000*1000*1000);
- 
+    printf( "\nTotal time in seconds: %lf s\n", total_time_in_seconds );
+    
+          
     double OPS = (nTotalElements)/total_time_in_seconds;
     printf( "Throughput: %lf MOPs/s\n", OPS );
     

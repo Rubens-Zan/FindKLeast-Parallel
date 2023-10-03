@@ -9,7 +9,6 @@ do
     for k in {1..10}
     do
         ./findKLeast $1 $TOTAL_ELEMENTOS $n | grep -oP '(?<=Total time in seconds: )[^ ]*'
-        
     done
 done
 
